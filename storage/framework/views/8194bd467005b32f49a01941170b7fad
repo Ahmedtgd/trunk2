@@ -1,0 +1,17 @@
+<div class="col-md-12">
+	<div class="row masonry-megamenu" style="display: none">
+		<?php foreach($allCategories as $cat): ?>
+			<div class="col-xs-3">
+		        <h4><a href="<?php echo e(URL::to('floor',array($cat['floor']))); ?>" target="_blank" style="color: black;"><?php echo e($cat['description']); ?></a></h4>
+		        <ul class="nav nav-submenu">
+		            <?php foreach($allsubCategories as $subCat): ?>
+		                <?php if($subCat['id'] == $cat['id']): ?>
+		                    <li><a href="<?php echo e(URL::to('sub-cat-details',array($cat['id'], $subCat['subid'],false))); ?>" target="_blank"><?php echo e($subCat['subdescription']); ?></a></li>
+		                <?php endif; ?>
+		            <?php endforeach; ?>
+		        </ul>
+		   </div>
+		<?php endforeach; ?>	
+	</div>
+</div>
+

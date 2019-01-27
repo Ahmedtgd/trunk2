@@ -1,0 +1,43 @@
+************************************************************************
+************************ G U I D E L I N E S ***************************
+************************************************************************
+
+1. ETIQUETTE
+a) Inform of non-availabilty 
+
+2. ENVIRONMENT
+a) You MUST create an .env file.
+b) In the .env, set your own local timezone.
+
+3. NAMING & VARIABLES
+a) Use snake casing for naming.
+b) Set IDE or Text Editor's col to 80.
+c) Use Tabs not Spaces
+d) Always pre-initialize your variables.
+
+4. JAVASCRIPT
+a) Write the JS code in the blade file itself.
+b) Use JS_BASE_URL 
+
+5. COMMENTS
+a) Use /**/ for comments.
+
+6. REPOSITORY
+a) Do "svn update" frequently.
+b) Before committing code to server, test it on local development machine.
+
+7. QUERIES
+a) All queries must be inside a try/except block.
+b) All insert/update queries MUST ROLLBACK on an exception without using transaction.
+c) All queries MUST CHECK FOR whereNull(TableName.deleted_at)
+
+8. AJAX
+a) Use relative url in Ajax request.
+b) Use CSRF token in Ajax header.
+c) AJAX responses must follow the correct layout.
+d) AJAX request MUST only send minimal data. Never dump the whole record in an request.
+e) Always put error function for an ajax.
+f) Do NOT use primary keys in a request.
+
+9. BROWSER
+a) We officially support, Firefox, Chrome, Internet Explorer & Edge. Your code must support and work as inteneded on the supported browser.

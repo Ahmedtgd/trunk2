@@ -1,0 +1,53 @@
+{
+    "name": "php-http/laravel-httplug",
+    "description": "Laravel package to integrate the Httplug generic HTTP client into Laravel",
+    "keywords": ["http", "discovery", "adapter", "message", "factory", "httplug", "php-http", "psr-7", "laravel"],
+    "homepage": "http://php-http.org",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Mathieu Santo Stefano--Féron",
+            "email": "mathieu.santostefano@gmail.com"
+        },
+        {
+            "name": "Daniel Nilsson"
+        },
+        {
+            "name": "Tobias Nyholm"
+        }
+    ],
+    "require": {
+        "php": "^5.5 || ^7.0",
+        "illuminate/support": "~5",
+        "php-http/message": "^1.3",
+        "php-http/client-common": "^1.2",
+        "php-http/cache-plugin": "^1.0",
+        "php-http/logger-plugin": "^1.0",
+        "php-http/discovery": "^1.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^4.5 || ^5.4",
+        "graham-campbell/testbench": "^3.1",
+        "friendsofphp/php-cs-fixer": "1.9.*",
+        "sllh/php-cs-fixer-styleci-bridge": "^1.5",
+        "php-http/curl-client": "^1.0",
+        "php-http/socket-client": "^1.0",
+        "php-http/guzzle6-adapter": "^1.1.1",
+        "php-http/react-adapter": "^0.2.1",
+        "php-http/buzz-adapter": "^0.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "Http\\Httplug\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Http\\Httplug\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test-ci": "vendor/bin/phpunit --coverage-text --coverage-clover=build/coverage.xml"
+    }
+}

@@ -1,0 +1,4 @@
+<?php if(Session::has($key)): ?>
+  <?php echo Session::get($key); ?>
+
+<?php endif; ?>

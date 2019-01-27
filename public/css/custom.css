@@ -1,0 +1,93 @@
+/**
+ * Created by Khakan Ali on 11/27/2015.
+ */
+.badgenew {
+  display: inline-block;
+  min-width: 10px;
+  padding: 3px 7px;
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 1;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  background-color: #777;
+  border-radius: 10px;
+}
+.badgenew:empty {
+  display: none;
+} 
+.profile-product::-webkit-scrollbar{
+    background-color: #FFFFFF;
+    width: 10px;
+    height: 10px;
+}
+.profile-product::-webkit-scrollbar-thumb{
+    background-color: #1abc9c;
+    border-radius: 10px;
+}
+.p-img-bordered:hover{
+    border: 1px solid #1abc9c;
+}
+.selected-pro{
+    border: 1px solid #1abc9c;
+}
+/*----------------------------*/
+.profile-product{
+    background:#fff !important;
+    max-height: 500px;
+    overflow-y: scroll;
+}
+
+.marker-labels {
+    background-color: black;
+    font-family: "Lucida Grande", "Arial", sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: left;
+    width: auto;
+    padding: 0px 5px 0px 5px;
+    border: 1px solid black;
+    white-space: nowrap;
+    color:white;
+
+}
+
+/*
+* Added By Chirag Viradiya on 10-05-2016
+*/
+.orderViewIcon .mainDiv{
+    border: 1px groove rgba(0,0,0,0.2);
+    margin-bottom: 5px;
+    display: inline-block;
+    position: relative;
+    padding:0;
+}
+.orderViewIcon .innerDiv{
+    padding: 10px;
+    vertical-align: middle; 
+}
+.orderViewIcon .noAnyProduct{
+    padding: 0;
+    color: #ccc;
+}
+.orderViewIcon .productLink{
+    min-height: 180px;
+    max-height: 180px;
+    overflow: hidden;
+}
+.marginTop25{
+    margin-top:25px;
+}
+.font18{
+    font-size: 18px;
+}
+.orderSelectDiv, .confirmOrder{
+    border: 1px groove rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    min-height: 200px;
+}
+.descriptionCat{
+    font-size: 12px;
+}

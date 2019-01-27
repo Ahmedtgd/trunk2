@@ -1,0 +1,27 @@
+.icons{
+margin-top:70px !important
+}
+table tr>td> hr
+{
+margin:0px
+}
+.wprice:hover,.sprice:hover,.price:hover{
+    color: #1abc9c;
+    border: 1px solid #1abc9c;
+}
+.fprice:hover{
+    border: 2px solid #27a98a;
+}
+.avg-price,.sprice{
+    padding-top: 16px;
+}
+.fprice .table>tbody>tr>th,.fprice .table>tbody>tr>td{
+border : 0px;
+}
+.wprice,.sprice{
+border: 1px solid #ddd;
+}
+.sprice-top{
+padding-top:10px;
+}
+

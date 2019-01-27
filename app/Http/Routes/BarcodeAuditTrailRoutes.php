@@ -1,0 +1,3 @@
+<?php
+/* OpenSupermall Custom Routes */
+?>

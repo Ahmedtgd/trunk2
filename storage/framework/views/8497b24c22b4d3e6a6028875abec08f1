@@ -1,0 +1,12 @@
+<?php foreach($allCategories as $cat): ?>
+	<h4 style="color:  #73D2C6 !important;" id="mobilecat<?php echo e($cat['id']); ?>" rel="<?php echo e($cat['id']); ?>"><a style="color: #73D2C6 !important;" href="<?php echo e(URL::to('floor',array($cat['floor']))); ?>"><?php echo e($cat['description']); ?></a><span class="pull-right mobilecat" onclick="" rel="<?php echo e($cat['id']); ?>" id="mobilecatplus<?php echo e($cat['id']); ?>"><img src="<?php echo e(asset('images/category/mobileplus.png')); ?>" width="20px"/></span></h4>
+	<div class="mobilecat-submenu" style="display: none;" id="mobilesubcatmenu<?php echo e($cat['id']); ?>">
+		<?php foreach($allsubCategories as $subCat): ?>
+			<?php if($subCat['id'] == $cat['id']): ?>
+				<h4 style="color: #73D2C6 !important; margin-left: 10px;"><a style="color: #73D2C6 !important;" href="<?php echo e(URL::to('sub-cat-details',array($cat['id'], $subCat['subid'],false))); ?>"><?php echo e($subCat['subdescription']); ?></a></h5>
+			<?php endif; ?>
+		<?php endforeach; ?>
+	</div>
+<?php endforeach; ?>	
+
+

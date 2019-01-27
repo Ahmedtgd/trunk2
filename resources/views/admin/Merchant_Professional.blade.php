@@ -1,0 +1,1 @@
+resources/views/admin/Merchant_Professional.blade.php

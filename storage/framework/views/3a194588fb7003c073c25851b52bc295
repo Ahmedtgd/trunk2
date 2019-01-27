@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<?php
+$mode=Session::get('mode');
+?>
+<?php /*
+<?php echo e(Counter::count(Request::path(), \Auth::check() ? \Auth::user()->id : null)); ?>
+
+*/ ?>
+<?php echo $__env->make('common.head', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+
+<body>
+	<?php if(isset($viewtype) && $mode=="onz" && $viewtype=="whiteifonz"): ?>
+	<?php echo $__env->make('common.onzheader', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+	<?php else: ?>
+	<?php echo $__env->make('common.header', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+	<?php endif; ?>
+	<?php echo $__env->yieldContent('content'); ?>
+	<?php echo $__env->yieldContent('scripts'); ?>
+	<?php if(isset($viewtype) && $mode=="onz"&& $viewtype=="whiteifonz"): ?>
+	<?php echo $__env->make('common.onzfooter', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+	<?php else: ?>
+	<?php echo $__env->make('common.footer', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+	<?php endif; ?>
+</body>
+</html>

@@ -1,0 +1,123 @@
+.brandlist h3{
+    text-align: center;
+    line-height: 60px;
+    font-size:  27px;
+}
+.border-box{
+    border: 1px solid #d3d3d3;  
+    padding: 10px;
+}
+.boxrow2-l
+{
+    height: 200px !important; 
+    border-left: none !important;
+    border-top: none !important;
+}
+.user_icon {
+    font-size: 42px;
+    margin: 13px 0 0 18px;
+}
+.boxrow4-l p {
+    color: #000;
+    font-size: 12px;
+     width: 74%;
+     float: left;
+}
+.boxrow4-l .dicsount{
+    color: #ce1d27;
+    font-size: 17px;
+    font-weight: bold;
+}
+.boxrow4-l h2{
+    font-size: 17px;
+    text-align: justify;
+}
+.boxrow4-l .mp_price{
+    width: 20%;
+}
+.row.no-margin1{
+    margin: 0px;
+}
+.moq_left{
+    border: 1px solid #d3d3d3;
+    margin-left: 15px;
+}
+#bueaty{
+    margin-top: 4%;
+}
+.border-box:last-child{
+    margin-left: 5px;
+    width: 49%;
+}
+.place_order{
+    border: 1px solid #d3d3d3;
+    padding-bottom: 8%;
+}
+.place_order h4{
+    font-weight: 500;
+    margin-left: 50%;
+    font-weight: bold;
+}
+.place_order .form .fa-male{
+    font-size: 42px;
+    margin: -11px 25px 0 18px;
+}
+.item_number{
+    font-size: 24px;
+    margin: 13px 0 0 18px;
+}
+.place_order  .quantity{
+    width: 30px;
+    height: 30px;
+    background: #1abc9c;
+    padding:    5px 0 0 8px;
+    color: #fff;
+    cursor: pointer;
+}
+.place_order .form{
+    display: flex;
+}
+.place_order .form input {
+    width: 30px;
+    text-align: center;
+}
+.place_order .rm-1{
+    font-size: 17px;
+    font-weight: bold;
+    margin-left: 10%;
+}
+.place_order p{
+    margin-bottom: 1px;
+    margin-left: 30%;
+}
+.submitowerhouseorder{
+     background: #1abc9c none repeat scroll 0 0;
+    border: medium none;
+    color: #fff;
+    font-size: 16px;
+    width: 83px;
+    height: 30px;
+}
+.resetowerhouseorder{
+    background: #1abc9c none repeat scroll 0 0;
+    border: medium none;
+    color: #fff;
+    font-size: 16px;
+    height: 30px;
+    margin-top: 4px;
+    width: 83px;
+}
+.order-border-box{
+    border:4px solid #1abc9c !important;
+    /*margin-bottom: 10px;*/
+}
+.pledge-icon{
+    color: #1abc9c;
+}
+.place_order_height{
+    height: 134px;
+}
+.pledge_error{
+    padding-top: 40px;
+    font-size: 17px;
+}

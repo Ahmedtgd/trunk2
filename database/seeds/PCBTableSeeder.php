@@ -1,0 +1,97 @@
+<?php
+
+use Illuminate\Database\Seeder;
+class PCBTableTableSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        DB::table('pcb_table')->truncate();
+		DB::table('pcb_table')->insert([
+			'p_min'=>500100,
+			'p_max'=>2000000,
+			'm'=>500000,
+			'r'=>1,
+			'cat_1_3_b'=>-400.00,
+			'cat_2_b'=>-800.00
+		]);
+		DB::table('pcb_table')->insert([
+			'p_min'=>2000100,
+			'p_max'=>3500000,
+			'm'=>2000000,
+			'r'=>5,
+			'cat_1_3_b'=>-250.00,
+			'cat_2_b'=>-650.00
+		]);
+		DB::table('pcb_table')->insert([
+			'p_min'=>3500100,
+			'p_max'=>5000000,
+			'm'=>3500000,
+			'r'=>10,
+			'cat_1_3_b'=>900.00,
+			'cat_2_b'=>900.00
+		]);
+		DB::table('pcb_table')->insert([
+			'p_min'=>5000100,
+			'p_max'=>7000000,
+			'm'=>5000000,
+			'r'=>16,
+			'cat_1_3_b'=>2400.00,
+			'cat_2_b'=>2400.00
+		]);
+		DB::table('pcb_table')->insert([
+			'p_min'=>7000100,
+			'p_max'=>10000000,
+			'm'=>7000000,
+			'r'=>21,
+			'cat_1_3_b'=>5600.00,
+			'cat_2_b'=>5600.00
+		]);
+		DB::table('pcb_table')->insert([
+			'p_min'=>10000100,
+			'p_max'=>25000000,
+			'm'=>10000000,
+			'r'=>24,
+			'cat_1_3_b'=>11900.00,
+			'cat_2_b'=>11900.00
+		]);
+		DB::table('pcb_table')->insert([
+			'p_min'=>25000100,
+			'p_max'=>40000000,
+			'm'=>25000000,
+			'r'=>24,
+			'cat_1_3_b'=>47900.00,
+			'cat_2_b'=>47900.00
+		]);		
+		DB::table('pcb_table')->insert([
+			'p_min'=>40000100,
+			'p_max'=>60000000,
+			'm'=>40000000,
+			'r'=>25,
+			'cat_1_3_b'=>84650.00,
+			'cat_2_b'=>84650.00
+		]);	
+		DB::table('pcb_table')->insert([
+			'p_min'=>60000100,
+			'p_max'=>100000000,
+			'm'=>60000000,
+			'r'=>26,
+			'cat_1_3_b'=>134650.00,
+			'cat_2_b'=>134650.00
+		]);	
+		DB::table('pcb_table')->insert([
+			'p_min'=>100000100,
+			'p_max'=>0,
+			'm'=>100000000,
+			'r'=>28,
+			'cat_1_3_b'=>238650.00,
+			'cat_2_b'=>238650.00
+		]);			
+    }
+}
+
+

@@ -1,0 +1,21 @@
+/home/osmall/osmall/trunk/vendor/moltin/laravel-cart/src/Moltin/Cart/CartServiceProvider.php
+
+1. Comment off the LaravelSesssion
+//use Moltin\Cart\Storage\LaravelSession as SessionStore;
+
+2. Add in line below to activate PHP Session instead
+use Moltin\Cart\Storage\Session as SessionStore;    // Use PHP Session
+
+
+/home/osmall/osmall/trunk/vendor/laravel/socialite/src/Two/AbstractProvider.php
+3. Comment off "throw new InvalidStateException;" in user()
+
+4. Add in "$this->redirect();"
+    public function user()
+    {
+        if ($this->hasInvalidState()) {
+            $this->redirect();  //Squidster KLUDGE
+            //throw new InvalidStateException;
+        }
+
+

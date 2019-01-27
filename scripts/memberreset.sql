@@ -1,0 +1,4 @@
+truncate member
+truncate memberremark
+truncate osmallmember
+truncate osmallmemberremark

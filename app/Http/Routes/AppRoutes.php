@@ -1,0 +1,9 @@
+<?php
+Route::group(["prefix"=>"app/v1"],function(){
+	Route::post('lscanm','AppBuyingProcessController@lscanM');
+	Route::post('bscanl','AppBuyingProcessController@bscanL');
+	Route::post('lscanb','AppBuyingProcessController@lscanB');
+	Route::post('blscanb','AppBuyingProcessController@blscanB');
+	Route::post('mscanl','AppBuyingProcessController@mscanL');
+});
+?>

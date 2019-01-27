@@ -1,0 +1,404 @@
+<?php
+
+use App\Classes;
+?>
+
+@extends("common.default")
+
+@section("content")
+<style type="text/css">
+    .overlay{
+        background-color: rgba(1, 1, 1, 0.7);
+        bottom: 0;
+        left: 0;
+        position: fixed;
+        right: 0;
+        top: 0;
+        z-index: 1001;
+    }
+    .overlay p{
+        color: white;
+        font-size: 18px;
+        font-weight: bold;
+        margin: 365px 0 0 610px;
+    }
+    .role_status_button{
+        margin-top: 10px;
+        width: 100px;
+    }
+</style>
+<?php $i=1; ?>
+<div class="overlay" style="display:none;">
+    <p>Please Wait...</p>
+</div>
+<div style="display: none;" class="removeable alert">
+    <strong id='alert_heading'></strong><span id='alert_text'></span>
+</div>
+
+<div class="container" style="margin-top:30px; margin-bottom:30px;">
+    <div class="row">
+        <div class="col-sm-3">
+           @include('admin/leftSidebar')
+        </div>
+
+
+        <div class="col-sm-offset-3">
+            @if(isset($merchants))
+            <h2>Merchants</h2>
+            {!! $merchants->render() !!}
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th colspan="1">Account Information</th>
+                            <th colspan="6" class="text-center">Company Details</th>
+                            <th >Shop Details</th>
+                            <th>Brand Details</th>
+                            <th>Remarks</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                        <tr>
+                            <th>No</th>
+                            <th>company name</th>
+                            <th>Domicile</th>
+                            <th>Business Type</th>
+                            <th>GST</th>
+                            <th>Websites</th>
+                            <th>Social Media</th>
+                            <th>O-Shop Name</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($merchants as $merchant)
+                        <tr>
+                            <td>
+                                {{ $merchant->id }}
+                            </td>
+
+                            <td>
+                                {{ $merchant->company_name }}
+                            </td>
+
+                            <td>
+                                @foreach($merchant->address()->get() as $address)
+                                {{ $address->id }}
+                                @endforeach
+                            </td>
+
+                            <td>
+                                {{ $merchant->business_type }}
+                            </td>
+
+                            <td>
+                                {{ $merchant->gst }}
+                            </td>
+
+                            <td>
+                                @foreach($merchant->websites()->get() as $website)
+                                {{ $website->url }}
+                                @endforeach
+                            </td>
+
+                            <td>
+                                @foreach($merchant->socialmedia()->get() as $socialmedia)
+                                {{ $socialmedia->url }}
+                                @endforeach
+                            </td>
+
+                            <td>
+                                {{ $merchant->oshop_name }}
+                            </td>
+
+                            <td>
+                                @foreach($merchant->brand()->get() as $brand)
+                                {{ $brand->name }}
+                                @endforeach
+                            </td>
+
+                            <td>
+                                {{ $merchant->remarks }}
+                            </td>
+                            <td id="status_column">
+                                <span id="status_column_text">
+                                    {{ $merchant->status }}
+                                </span>
+                            </td>
+                            <td>
+                                <div class="action_buttons">
+                                    <?php
+                                    $approve = new Classes\Approval('merchant', $merchant->id);
+                                    echo $approve->view;
+                                    ?>
+                                </div>
+                            </td>
+
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+            @endif
+
+
+            @if(isset($stations))
+            <h2>Station Master</h2>
+            <div class="table-responsive">
+                         <div class="table-responsive col-sm-12 ">
+
+                                <table class="table text-muted " id="product_details_table">
+                                    <thead>
+                                    <tr style="background-color: #604a7b; color: #fff;">
+                                        <th>No</th>
+                                        <th>Station ID</th>
+                                        <th>Company name</th>
+                                        <th>Domicile</th>
+                                        <th>GST</th>
+                                        <th>Business Type</th>
+                                        <th>Website</th>
+                                        <th>Social Media</th>
+                                        <th>Current E-Commerce</th>
+                                        <th>Brand Details</th>
+                                        <th>Remarks</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                    <thead>
+                                    <tbody>
+
+                                    @foreach($stations as $station)
+                                    <tr>
+                                        <td style="text-align: center;">
+											{{$i++}}
+										</td>
+                                        <td>
+                                            <?php
+                                            $station_id = str_pad($station->id, 10, '0', STR_PAD_LEFT);
+                                            ?>
+                                               <a href="#" class="update" data-id="{{ $station->id }}"> [{{$station_id}}] </a>
+                                        </td>
+
+                                        <td>
+                                            {{ $station->company_name }}
+                                        </td>
+
+                                        <td>
+                                            @foreach($station->country()->get() as $country)
+                                            {{ $country->name }}
+                                            @endforeach
+                                        </td>
+
+
+                                        <td>
+                                            {{ $station->gst }}
+                                        </td>
+
+                                        <td>
+                                            <?php
+                                            $business_type = ucwords(str_replace('_',' ',$station->business_type));
+                                            ?>
+                                            {{ $business_type }}
+                                        </td>
+
+                                        <td>
+                                            <?php
+                                            $j=0;
+                                            ?>
+                                            @foreach($station->websites()->get() as $website)
+                                                @if($website->type == "website")
+                                                        <?php
+                                                        if ($j>0){ echo ', ';}
+                                                            $j++;
+                                                        ?>
+                                                        <a href="{{ $website->url }}">{{ $website->name }}</a>
+                                                @endif
+                                            @endforeach
+                                        </td>
+                                        <td>
+                                            <?php
+                                            $j=0;
+                                            ?>
+                                            @foreach($station->websites()->get() as $website)
+                                                @if($website->type == "socialmedia")
+                                                    <?php
+                                                    if ($j>0){ echo ', ';}
+                                                    $j++;
+                                                    ?>
+                                                        <a href="{{ $website->url }}">{{ $website->name }}</a>
+                                                @endif
+                                            @endforeach
+                                        </td>
+                                        <td>
+                                            <?php
+                                            $j=0;
+                                            ?>
+                                            @foreach($station->websites()->get() as $website)
+                                                @if($website->type == "ecommerce")
+                                                    <?php
+                                                    if ($j>0){ echo ', ';}
+                                                    $j++;
+                                                    ?>
+                                                        <a href="{{ $website->url }}">{{ $website->name }}</a>
+                                                @endif
+                                            @endforeach
+                                        </td>
+
+                                        <td>
+                                            <?php
+                                            $j=0;
+                                            ?>
+                                            @foreach($station->brand()->get() as $brand)
+                                                    <?php
+                                                    if ($j>0){ echo ', ';}
+                                                    $j++;
+                                                    ?>
+                                            {{ $brand->name }}
+                                            @endforeach
+                                        </td>
+
+                                        <td>
+                                            {{ $station->remarks }}
+                                        </td>
+                                        <td id="status_column">
+                                            <span id="status_column_text" >
+                                                {{ ucfirst($station->status) }}
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <div class="action_buttons">
+                                                <?php
+                                                $approve = new Classes\Approval('station', $station->id);
+                                                echo $approve->view;
+                                                ?>
+                                            </div>
+                                        </td>
+
+                                    </tr>
+                                    @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+            </div>
+            @endif
+        </div>
+    </div>
+</div>
+
+
+<script src="{{url('js/jquery.dataTables.min.js')}}"></script>
+<script src="{{url('jqgrid/jquery.jqGrid.min.js')}}"></script>
+
+
+<script>
+    (function(){
+
+        function format ( tr ) {
+
+            var j = tr.attr('data-last');
+
+            var table='<table class="table child_table" cellspacing="0" width="100%">';
+            table+='<thead>';
+            table+='<tr><th>Id</th><th>Name</th><th>Description</th><th>Quantity</th><th>Price</th><th>Sub Total</th></tr>';
+            table+='</thead>';
+            table+='<tbody>';
+
+            for (i = 1;i<=j;i++){
+                var id = tr.attr('data-id-'+i);
+                var name = tr.attr('data-name-'+i);
+                var qty = tr.attr('data-qty-'+i);
+                var price = tr.attr('data-price-'+i);
+                var des = tr.attr('data-des-'+i);
+                var total = tr.attr('data-total-'+i);
+                table+='<tr><td>'+id+'</td><td>'+name+'</td><td>'+des+'</td><td>'+qty+'</td><td>'+price+'</td><td>'+total+'</td></tr>';
+            }
+
+            table+='</tbody>';
+            table+='</table>';
+
+            return table;
+        }
+
+        var table = $('#product_details_table').DataTable({
+			"order": [],
+			'scrollX':true,
+			 "columns": [
+				{ "width": "20px", "orderable": false },
+				{ "width": "85px" },
+				{ "width": "130px" },
+				{ "width": "120px" },
+				{ "width": "120px" },
+				{ "width": "120px" },
+				{ "width": "120px" },
+				{ "width": "120px" },
+				{ "width": "120px" },
+				{ "width": "120px" },
+				{ "width": "85px" },
+				{ "width": "85px" },
+				{ "width": "85px" }
+			  ]			
+        });
+
+
+
+
+        $('#shipping_details_table').DataTable();
+        $('#lower_product_detail_table').DataTable();
+        $('#payment_detail_products').DataTable();
+        $('#voucher_payment_detail').DataTable();
+        $('#open_wish_table').DataTable();
+        $('#auto_link_table').DataTable();
+        $('#auto_link_table_2').DataTable();
+
+
+        var vtable = $('#voucher_detail_table').DataTable({
+            "columnDefs": [ {
+                "targets": 0,
+                "data": null,
+                "className":      'details-control-2',
+                "orderable":      false,
+                "defaultContent": ""
+            } ]
+        });
+
+        $('td.details-control-2').on('click', function () {
+            console.log('clicked');
+            var tr = $(this).closest('tr');
+            var row = vtable.row( tr );
+
+            if ( row.child.isShown() ) {
+                // This row is already open - close it
+                row.child.hide();
+                tr.removeClass('shown');
+            }
+            else {
+                // Open this row
+                row.child( format(tr) ).show();
+                tr.addClass('shown');
+            }
+        } );
+
+
+        $('#datetimepicker , #datetimepickerr').on('change',function(){
+            var date1 = $('#datetimepicker').val();
+            var date2 = $('#datetimepickerr').val();
+
+            $('#dateSince').html(date1);
+
+            $.ajax({
+               url: '{{url('/merchant/calc-sale')}}',
+               data: {'date1': date1, 'date2' : date2},
+               headers: { 'X-XSRF-TOKEN' : '{{\Illuminate\Support\Facades\Crypt::encrypt(csrf_token())}}' },
+               error: function() {
+
+               },
+               success: function(response) {
+                  $('#amountSince').html(response.payment);
+                  $('#amountBetween').html(response.paymentSince);
+               },
+               type: 'POST'
+            });
+        });
+    })();
+</script>
+@yield("left_sidebar_scripts")
+@stop

@@ -1,0 +1,383 @@
+<?php 
+use App\Http\Controllers\IdController;
+?>
+<div class="container mobile p_b2b p_mobile_view" style="display: none;">
+<?php if(!is_null($productb2b)): ?>
+<div class="row">
+	<div class="col-xs-12" style="">
+		<img src="<?php echo e(asset('/')); ?>images/product/<?php echo e($product['pro']->id); ?>/<?php echo e($product['pro']->photo_1); ?>"
+					title="product-image"
+					class="img-responsive" style="margin-bottom: 5px;">
+		<?php /* AutoLink Button */ ?>
+	
+	</div>
+</div>
+<div class="row">
+	<div class="col-xs-12">
+		<h2><?php echo e($product['pro']->name ? $product['pro']->name : "-"); ?></h2>
+	</div>
+</div>
+<div class="row" style="font-size: 1.2em;font-weight: bold;">
+	<div class="col-xs-6 pull-left">
+		<span>Business To Business</span>
+	</div>
+	<div class="tier-price col-sm-12 col-xs-12">
+		<?php if($autolink_status == 1 || $immerchant == 1 || $isadmin == 1): ?>
+			<?php if(isset($productb2b)): ?>
+				<?php  $wholesales = \App\Models\Wholesale::where('product_id', $productb2b->id)->orderBy('funit','asc')->take(4)->get(); ?>
+				<?php  $all_wholesales2 = \App\Models\Wholesale::where('product_id', $productb2b->id)->get(); ?>
+			<?php endif; ?>
+		<?php if(isset($wholesales)): ?>
+			<div class="table-responsive" style="border:0px">
+				<table class="priceTable table">
+					<thead>
+						<?php if(isset($product['pro']->special_funit) && isset($product['pro']->special_unit) && isset($product['pro']->special_price)): ?>
+							<tr  style='color: #F54400'>
+								<th class='text-left special_price_row'>
+									<?php /* <span> <?php echo e($product['pro']->special_funit); ?> </span> -
+									<span> <?php echo e($product['pro']->special_unit); ?> </span> */ ?>
+									Special Price
+								</th>
+								<th class='text-right special_price_row'>
+									<span> <?php echo e($currency); ?> </span>
+									<span> <?php echo e(number_format($product['pro']->special_price/100,2)); ?> </span>
+								</th>
+							</tr>
+						<?php endif; ?>
+						<tr>
+							<th class='text-left'>Wholesale Price</th>
+							<th class='text-right'></th>
+						</tr>
+						<tr>
+							<th class='text-left'>Tier</th>
+							<th class='text-right'>Price/Unit</th>
+						</tr>
+					</thead>
+					<tbody>
+						<?php  $wholesalescount = count($wholesales); ?>
+						<?php  $all_wholesalescount = count($all_wholesales2); ?>
+						<?php  $counter = 1;; ?>
+						<?php foreach($wholesales as $wholesale): ?>
+						<tr>
+							<td class='text-left'>
+								<?php if($wholesalescount == $all_wholesalescount && $counter == $all_wholesalescount): ?>
+									<span> > <?php echo e($wholesale->funit); ?> </span>	
+								<?php else: ?> 
+									<span> <?php echo e($wholesale->funit); ?> </span> -
+									<span> <?php echo e($wholesale->unit); ?> </span>
+								<?php endif; ?>
+							</td>
+							<td class='text-right'>
+								<span> <?php echo e($currency); ?> </span>
+								<span> <?php echo e(number_format($wholesale->price/100,2)); ?> </span>
+							</td>
+						</tr>
+						<?php $counter++; ?>
+						<?php endforeach; ?>
+					</tbody>
+				</table>
+			</div>
+		<?php else: ?>
+		<div class="row">
+			<div id='alert' class="cart-alert alert alert-warning" role="alert" style="border-color: red;">
+			<strong><h4><a href="#">
+				<b style="color: red;">
+					  This product is not available for B2B
+				</b></a></h4>
+			</strong>
+			</div>
+		</div>
+		<?php endif; ?>
+		<?php else: ?>
+			<div class="row">
+				<div id='alert' class="cart-alert alert alert-warning" role="alert" style="border-color: red;">
+				<strong><h4><a href="#">
+					<b style="color: red;">
+						<?php if(!isset($productb2b)): ?>
+							This product is not available for B2B
+						<?php else: ?>	
+							<?php if($autolink_requested == 0): ?>
+								Please Autolink to this merchant to view B2B prices!
+							<?php else: ?>
+								Please wait for merchant's Autolink approval!
+							<?php endif; ?>
+						<?php endif; ?>
+					</b></a></h4>
+				</strong>
+				</div>
+			</div>
+		<?php endif; ?>
+	</div>
+	<br>
+	<div class='col-xs-12'>
+		<?php if($autolink_status == 1 || $immerchant == 1 || $isadmin == 1): ?>
+			<?php if(isset($productb2b)): ?>
+				<a title="Price List" tabindex="0"  data-toggle="popover" data-trigger="focus" data-container="body" data-placement="top" type="button" data-html="true"  id="<?php echo e($product['pro']->id); ?>">See full price list</a>
+			<?php endif; ?>
+		<?php endif; ?>
+	</div>
+	<?php /* popover view */ ?>
+	<div class="hide" id="price-<?php echo e($product['pro']->id); ?>">
+		<?php if($autolink_status == 1 || $immerchant == 1 || $isadmin == 1): ?>
+		<?php if(isset($productb2b)): ?>
+			<?php  $all_wholesales = \App\Models\Wholesale::where('product_id', $productb2b->id)->orderBy('funit','asc')->get(); ?>
+		<?php endif; ?>							
+		<?php if(isset($all_wholesales)): ?>
+			<div class="row">
+				<div class="table-responsive" style="border:0px">
+					<table class="priceTable table">
+						<thead>
+							<tr>
+								<th class='text-left'>Tier</th>
+								<th class='text-right'>Price/Unit</th>
+							</tr>
+						</thead>
+						<tbody>
+							<?php if(isset($product['pro']->special_funit) && isset($product['pro']->special_unit) && isset($product['pro']->special_price)): ?>
+								<tr  style='color: #F54400'>
+									<td class='text-left'>
+										<span> <?php echo e($product['pro']->special_funit); ?> </span> -
+										<span> <?php echo e($product['pro']->special_unit); ?> </span>
+									</td>
+									<td class='text-right'>
+										<span> <?php echo e($currency); ?> </span>
+										<span> <?php echo e(number_format($product['pro']->special_price/100,2)); ?> </span>
+									</td>
+								</tr>
+							<?php endif; ?>
+							<?php  $all_wholesalescounter = count($all_wholesales);; ?>
+							<?php  $counter = 1;; ?>
+							<?php foreach($all_wholesales as $wholesale): ?>
+							<?php /* start: all data for calculation */ ?>
+							<p  class=' price-info-<?php echo e($product["pro"]->id); ?>'
+								special-funit='<?php echo e(isset($product["pro"]->special_funit) ? $product["pro"]->special_funit : 0); ?>'
+								special-unit='<?php echo e(isset($product["pro"]->special_unit) ? $product["pro"]->special_unit : 0); ?>'
+								special-price='<?php echo e(isset($product["pro"]->special_price) ? $product["pro"]->special_price : 0); ?>'
+								from-unit='<?php echo e($wholesale->funit); ?>'
+								to-unit='<?php echo e($wholesale->unit); ?>'
+								price='<?php echo e($wholesale->price); ?>'>
+							</p>
+							<?php /* end */ ?>
+							<tr>
+								<td class='text-left'>
+									<?php if($all_wholesalescounter == $counter): ?>
+										<span> > <?php echo e($wholesale->funit); ?> </span>
+										<input type="hidden" id="funit<?php echo e($counter); ?>" value="<?php echo e($wholesale->funit); ?>" />
+										<input type="hidden" id="unit<?php echo e($counter); ?>" value="100000000" />
+										<input type="hidden" id="wprice<?php echo e($counter); ?>" value="<?php echo e($wholesale->price/100); ?>" />													
+									<?php else: ?>
+										<span> <?php echo e($wholesale->funit); ?> </span> -
+										<span> <?php echo e($wholesale->unit); ?> </span>
+										<input type="hidden" id="funit<?php echo e($counter); ?>" value="<?php echo e($wholesale->funit); ?>" />
+										<input type="hidden" id="unit<?php echo e($counter); ?>" value="<?php echo e($wholesale->unit); ?>" />
+										<input type="hidden" id="wprice<?php echo e($counter); ?>" value="<?php echo e($wholesale->price/100); ?>" />
+									<?php endif; ?>
+								</td>
+								<td class='text-right'>
+									<span> <?php echo e($currency); ?> </span>
+									<span> <?php echo e(number_format($wholesale->price/100,2)); ?> </span>
+								</td>
+							</tr>
+							
+							<?php $counter++; ?>
+							<?php endforeach; ?>
+							<input type="hidden" id="counter" value="<?php echo e($counter); ?>" />
+						</tbody>
+					</table>
+				</div>
+			</div>
+		<?php endif; ?>
+		<?php endif; ?>
+	</div>	
+</div>
+<div class="row" style="font-size: 1.2em;font-weight: bold;">
+	<div class="col-xs-6 pull-left">
+		<span>Available</span>
+	</div>
+	<div class="col-xs-6 pull-right">
+		<?php echo e($productb2b->available?$productb2b->available:"0"); ?>
+
+	</div>
+</div>
+<?php /* SPACE FOR BOX */ ?>
+<div class="row">
+	<div class="col-xs-12">
+	<?php if($autolink_status == 1 || $immerchant == 1 || $isadmin == 1): ?>
+	<?php  $amountdef = \App\Models\Wholesale::where('product_id', $productb2b->id)->orderBy('funit','asc')->first();; ?>
+	<?php if(!is_null($amountdef)): ?>	
+		<table class="table noborder">
+		<input type="hidden" value="<?php echo e($productb2b->free_delivery_with_purchase_qty ? $productb2b->free_delivery_with_purchase_qty : '0'); ?>" id="free_delivery_with_purchase_qty2" />
+		<input type="hidden" value="<?php echo e($productb2b->free_delivery ? $productb2b->free_delivery : '0'); ?>" id="free_delivery2" />
+		<input type="hidden" value="<?php echo e(number_format($deliveryb2b,2)); ?>" id="mydelprice2" />
+		<input type="hidden" value="<?php echo e(number_format($deliveryb2b,2)); ?>" id="mycart_delprice2" />
+		<?php  $amount = 0; ?>
+		<?php  $delivery = $productb2b->del_west_malaysia ? $productb2b->del_west_malaysia / 100 : "0.0";; ?>
+
+		<?php  $amount = \App\Models\Wholesale::where('product_id', $productb2b->id)->orderBy('funit','asc')->first()->price;; ?>
+		<tr><th style="padding-bottom:0">Amount</th>
+			<td style="padding-bottom:0"><?php echo e($currency); ?></td>
+			<td style="padding-bottom:0;"><span class="amt2" amount=<?php echo e($amount/100); ?>><?php echo e(number_format($amount/100,2)); ?></span></td>
+		</tr>
+		<tr>
+			<th style="padding-bottom:0">Delivery</th>
+			<td style="padding-bottom:0"><?php echo e($currency); ?></td>
+			<td style="padding-bottom:0">
+			<span class="del_price2">
+			<?php echo e(number_format($deliveryb2b,2)); ?>
+
+				</span>
+			</td>
+		</tr>
+		<tr><td colspan="3"><hr></td></tr>
+		<tr>
+			<th style="padding-bottom:0;padding-top:0">Total</th>
+			<td style="padding-bottom:0;padding-top:0"><?php echo e($currency); ?></td>
+			<td style="padding-bottom:0;padding-top:0" id='hidden-total-price' class='hidden'>
+				<?php echo e($amount + $deliveryb2b); ?></td>
+			<td style="padding-bottom:0;padding-top:0" id='total-price'><span class="total2"><?php echo e(number_format(($amount/100) +$deliveryb2b,2)); ?></span></td>
+		</tr>
+		<?php if($showGST==1): ?>
+		<tr>
+			<th style="padding-bottom:8;padding-top:0">(Incl. <?php echo e($gst_tax_rate); ?>% SST)</th>
+			
+		</tr>
+		<tr>
+		
+		</tr>
+		<?php endif; ?>
+		
+	</table><!-- AutoLink validation was removed -->	
+	<?php endif; ?>
+	<?php endif; ?>
+	</div>
+</div>
+<?php /* ENDS */ ?>
+<div class="row">
+	<div class="col-xs-12">
+		<div class="input-group" style="margin-bottom:2px; <?php if(!empty($discount_detail)): ?> display: none; <?php endif; ?>">
+								<span class="input-group-btn">
+									<button <?php if(!empty($discount_detail)): ?> disabled="" <?php endif; ?> type="button" class="btn btn-green btn-number2" 
+									data-action="plus" style="height: 50px;width: 75px;">
+											 <span class="glyphicon glyphicon-plus"></span>
+									</button>
+								</span>
+								<input <?php if(!empty($discount_detail)): ?> readonly="" <?php endif; ?> style="text-align: center; padding-left: 0px; padding-right: 0px;width:100%; height: 50px;font-size: 2em;"
+										type="text" name="quant[3]" class="form-control input-number quantity2"
+										value="1" min="1" max=<?php echo e($productb2b->available ? $productb2b->available : "0"); ?>>
+										<span class="input-group-btn">
+									<button <?php if(!empty($discount_detail)): ?> disabled="" <?php endif; ?> type="button" class="btn btn-green btn-number2 btn-lg" 
+									data-action="minus" style="height: 50px;width: 75px;">
+											 <span class="glyphicon glyphicon-minus"></span>
+									</button>
+								</span>
+							</div>
+	</div>
+</div>
+<div class="row">
+	<div class="col-xs-12">
+		<?php echo Form::hidden('quantity', 1); ?>
+
+										<?php echo Form::hidden('id', $productb2b->id); ?>
+
+		<button  class='btn  btn-block cartBtn2' title="Adds a product into your Shopping Cart" type='submit'  style="font-size: 1.2em;background-color:#28A98A;color: white;">
+			<img src="<?php echo e(asset('images/shopping_cart_button.png')); ?>" alt="Add to Cart" style="width:50px;height:50px;">
+		Add Cart</button>
+		</form>
+</div>
+</div>
+<hr>
+<?php /* Description */ ?>
+<div class="row">
+	<div class="col-xs-12">
+		<h3>Product Description</h3>
+	</div>
+	<div class="col-xs-12">
+		<table class="table table-striped">
+		<tr>
+			<th>
+				Product&nbsp;ID
+			</th>
+			<td>
+				<?php echo e(IdController::nP($product['pro']->id)); ?>
+
+			</td>
+		</tr>
+		<tr>
+			<th>
+				Name
+			</th>
+			<td>
+				<?php echo e($product['pro']->name ? $product['pro']->name : "-"); ?>
+
+			</td>
+		</tr>
+		<tr>
+			<th>
+				Brand
+			</th>
+			<td>
+				<?php echo e($product['pro']->brand ? $product['pro']->brand->name : "-"); ?>
+
+			</td>
+		</tr>
+		<tr>
+			<th>
+				Category
+			</th>
+			<td>
+				<?php echo e($product['pro']->category ? $product['pro']->category->description : "-"); ?>
+
+			</td>
+		</tr>
+		<tr>
+			<th>
+				Sub Category
+			</th>
+			<td>
+				<?php echo e($product['subcat_level1'] ? htmlentities($product['subcat_level1']->description) : "-"); ?>
+
+			</td>
+		</tr>
+		<tr>
+			<th>
+				O-Shop
+			</th>
+			<td>
+				<?php if(!is_null($oshop_id) && $issingle == 0): ?>
+					<a href="<?php echo e(route('oshop.one', ['url' => $oshop_url])); ?>" ><?php echo e($oshopname); ?></a>
+				<?php else: ?>
+					<?php echo e($oshopname); ?>
+
+				<?php endif; ?>
+			</td>
+		</tr>
+		<tr>
+			<th>
+				Description
+			</th>
+			<td>
+				<?php echo e($product['pro']->description); ?>
+
+			</td>
+		</tr>
+		</table>
+	</div>	
+</div>
+<hr>
+<div class="row">
+	<div class="col-xs-12">
+		<h3>Product Details</h3>
+	</div>
+	<div class="col-xs-12"
+		style=" min-height: 20px;" id="product_description_summernote">
+		<iframe width="100%" style="border: none; min-height: 300px;" src="<?php echo e(URL::to('/')); ?>/mobile/productdetails/<?php echo e($product['pro']->productdetail_id); ?>"></iframe>
+	</div>	
+</div>
+<?php endif; ?>
+</div>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		
+	});
+</script>

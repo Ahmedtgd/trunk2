@@ -1,0 +1,63 @@
+.oshop-certificate-content {
+  box-sizing: border-box;
+}
+
+.oshop-certificate-body{ background: #1e0e0e; color: #908281; padding: 20px 0; font-family: 'Roboto', sans-serif;}
+.oshop-aboutus-body{ background: #1e0e0e; color: #fffbf9; padding: 20px 0; font-family: 'Roboto', sans-serif;}
+
+.oshop-certificate-content .container{   border: 2px solid #ad6125; }
+.oshop-certificate-content .padding-top-10 { padding-top: 10px;}
+.oshop-certificate-content .fontStyle { font-style: italic;}
+.oshop-certificate-content h4 {   margin: 0; padding: 0; border-bottom: 1px solid #422925; color: #f7e9e9; display: inline; }
+.oshop-certificate-content hr {   border-top: 1px solid #DDDDDD !important; }
+.padding-top-10 { padding-top: 10px;}
+.padding-top-30 { padding-top: 30px;}
+.oshop-certificate-content .padding-inner { padding: 40px 25px 40px 25px; }
+.oshop-certificate-content .nomargin { margin: 0; }
+
+.border-bottom1 {
+    border-top: 1px solid #3e2b27;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.oshop-aboutus-content .container{   border: 2px solid #DDDDDD !important;}
+.oshop-aboutus-content hr {   border-top: 1px solid #DDDDDD !important; }
+.oshop-aboutus-content .page-header { margin: 0 auto; padding-bottom: 0; border-bottom: 1px solid #DDDDDD !important; width: 50%; text-align: center; color: #81A752 !important; }
+.oshop-aboutus-content .paragraph-header { color: #81A752 !important; font-weight: 600; font-size: 16px;}
+.oshop-aboutus-content .padding-inner { padding: 0 40px 0 40px; }
+.oshop-aboutus-content h4 {   margin: 0; padding: 0; color: #575757 !important; display: inline; }
+.oshop-aboutus-content .fontStyle { font-style: italic; color: #575757 !important;}
+.oshop-aboutus-content .padding-top-10 { padding-top: 10px;}
+.oshop-aboutus-content .nomargin { margin: 0; color:#beb0af;}
+.oshop-aboutus-content .padding-inner p { color: #575757 !important; }
+.oshop-aboutus-content .padding-inner h4, span { color: #c3bfbe; }
+.oshop-aboutus-content .nopadding p { color: #c3bfbe; }
+
+.oshop-aboutus-body .nav li a.btn-pink{
+    color: #000;
+    font-size: 1.3em;
+    padding: 3px 15px;
+    border-radius: 10px;
+}
+
+.footer_lower{background-color: #000;}
+
+.textBelowImg { font-size:15px;color:white; padding-top: 7px; margin-left: 4px;}
+.border-bottom-span{border-top: 1px solid #5f6879; width: 100%;}
+.add-padding .col-md-3 { padding: 5px;}
+
+.navGreenBar{
+    margin: 0 auto;
+    top: 20%;
+    left: 4%;
+    position: fixed;
+    z-index: 9;
+}
+.navGreenBar li{ margin-bottom: 10px; padding:10px; list-style: none}
+.navGreenBar li a{  border-radius: 4px; border:2px solid #57989a; text-align: center; font-size: 10px; display: block; padding: 6px; color: #d9e5f5;}
+
+.navGreenBar li:first-child a {
+    border:none;
+    margin-bottom: -25px;
+}
